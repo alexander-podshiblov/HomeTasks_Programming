@@ -1,19 +1,21 @@
+#include <stdio.h>
 #include "list.h"
 #pragma once
 
-struct Node
+class PList : public List
 {
-    int value;
-    Node *next;
-};
-
-class pList : public List
-{
-public:
-    pList();
+private:
+    struct Node
+    {
+        int value;
+        Node *next;
+    };
     Node *head;
+public:
+    PList();
+    ~PList();
     void add(int value, int num);
-    int lengh();
+    int length();
     void del(int num);
     void printList();
     int returnValue(int num);

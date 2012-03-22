@@ -1,18 +1,25 @@
+#include <stdio.h>
 #include "plist.h"
 
-pList::pList()
+PList::PList()
 {
-    Node *head = new Node;
+    head = new Node;
     head->value = 0;
     head->next = NULL;
 }
 
-pList::lengh()
+PList::~PList()
+{
+    removeList();
+    delete head;
+}
+
+int PList::length()
 {
     return head->value;
 }
 
-pList::add(int value, int num)
+void PList::add(int value, int num)
 {
     if (num <= head->value)
         {
@@ -43,7 +50,7 @@ pList::add(int value, int num)
     head->value++;
 }
 
-pList::del(int num)
+void PList::del(int num)
 {
     if ((num <= head->value) && (num > 0))
         {
@@ -54,21 +61,21 @@ pList::del(int num)
                 tmp = tmp->next;
                 k++;
             }
-            List *tmp2 = tmp->next;
+            Node *tmp2 = tmp->next;
             tmp->next = tmp->next->next;
             delete tmp2;
             head->value--;
         }
 }
 
-pList::removeList()
+void PList::removeList()
 {
     while (head->next != NULL)
         del(1);
     head->value = 0;
 }
 
-pList::returnValue(int num)
+int PList::returnValue(int num)
 {
     if ((num <= head->value) && (num > 0))
     {
@@ -85,7 +92,7 @@ pList::returnValue(int num)
         return -32000;
 }
 
-pList::printList()
+void PList::printList()
 {
     Node *tmp = head;
         while(tmp->next)
@@ -95,7 +102,7 @@ pList::printList()
         }
 }
 
-pList::swap(int i, int j)
+void PList::swap(int i, int j)
 {
     if ((i <= head->value) && (i > 0) && (j <= head->value) && (j > 0))
     {
