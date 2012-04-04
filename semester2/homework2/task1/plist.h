@@ -4,13 +4,6 @@
 
 class PList : public List
 {
-private:
-    struct Node
-    {
-        int value;
-        Node *next;
-    };
-    Node *head;
 public:
     PList();
     ~PList();
@@ -21,4 +14,12 @@ public:
     int returnValue(int num);
     void removeList();
     void swap(int i, int j);
+
+private:
+    struct Node
+    {
+        int value;
+        Node *next;
+    };
+    Node *head;
 };

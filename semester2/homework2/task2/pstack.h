@@ -4,13 +4,6 @@
 
 class PStack : public Stack
 {
-private:
-    struct Node
-    {
-      int value;
-      Node *next;
-    };
-    Node *head;
 public:
     PStack();
     ~PStack();
@@ -19,4 +12,12 @@ public:
     void del();
     int returnLast();
     void removeStack();
+
+private:
+    struct Node
+    {
+      int value;
+      Node *next;
+    };
+    Node *head;
 };

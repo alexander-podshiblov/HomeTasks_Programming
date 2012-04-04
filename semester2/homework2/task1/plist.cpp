@@ -35,7 +35,7 @@ void PList::add(int value, int num)
             tmp2->next = tmp->next->next;
             tmp->next->next = tmp2;
         }
-        else
+    else
         {
             Node *tmp = head;
             while (tmp->next)

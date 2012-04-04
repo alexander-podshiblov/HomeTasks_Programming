@@ -4,9 +4,6 @@
 
 class AStack : public Stack
 {
-private:
-    int *m;
-    int maxSize;
 public:
     AStack();
     ~AStack();
@@ -15,5 +12,9 @@ public:
     void del();
     int returnLast();
     void removeStack();
+
+private:
+    int *m;
+    int maxSize;
 };
 

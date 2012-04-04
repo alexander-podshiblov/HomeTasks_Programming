@@ -4,10 +4,6 @@
 
 class AList : public List
 {
-private:
-    int *m;
-    int maxSize;
-
 public:
     AList();
     ~AList();
@@ -18,5 +14,9 @@ public:
     int returnValue(int num);
     void removeList();
     void swap(int i, int j);
+
+private:
+    int *m;
+    int maxSize;
 };
 
