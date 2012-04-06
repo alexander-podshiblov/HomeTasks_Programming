@@ -1,17 +1,24 @@
 #include <stdio.h>
 #pragma once
 
+/**
+@class PQueue
+класс, реализующий очередь с приоритетами
+*/
+
 template <typename T>
 class PQueue
 {
 public:
+/// исключение
     class EmptyList {};
+/// конструктор, инициализация полей
     PQueue()
     {
         head = new Node;
         head->next = NULL;
     }
-
+/// деструктор, очистка памяти
     ~PQueue()
     {
         while (head->next != NULL)
@@ -22,7 +29,11 @@ public:
         }
         delete head;
     }
-
+/**
+  *добавляет новый элемент в очередь
+  *@param T - значение элемента очереди
+  *@param priority - численный приоритет элемента
+  */
     void enqueue(T value, int priority)
     {
         Node *tmp = head;
@@ -34,7 +45,7 @@ public:
         tmp2->priority = priority;
         tmp->next = tmp2;
     }
-
+/// возвращает значение элемента с максимальным приоритетом и удаляет его из очереди
     T dequeue()
     {
         if (head->next != NULL)
