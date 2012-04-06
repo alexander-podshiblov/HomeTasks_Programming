@@ -5,6 +5,7 @@ template <typename T>
 class PQueue
 {
 public:
+    class EmptyList {};
     PQueue()
     {
         head = new Node;
@@ -45,6 +46,8 @@ public:
             delete tmp;
             return k;
         }
+        else
+            throw EmptyList();
     }
 
 private:
@@ -57,3 +60,4 @@ private:
 
     Node *head;
 };
+
