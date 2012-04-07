@@ -1,10 +1,22 @@
 #include <stdio.h>
 #pragma once
-
+/**
+@class Outputer
+Класс, выводящий матрицу n*n (n - нечетное) при обходе по спирали, начиная с центра.
+Матрица должна храниться в виде массива из n*n элементов типа int,
+сктроки матрицы последовательно друг за другом, начиная с певой, записаны в массив.
+*/
 class Outputer
 {
 public:
-    virtual void bypass(int *m, int n, FILE *stream);
+    virtual ~Outputer(){};
+    /// совершает обход массива по спирали
+    virtual void bypass(int *m, int n);
+    /**
+    печатает элементы, реализуется в классах наследниках
+    @param elem - элемент для печати
+    */
+    virtual void print(int elem) = 0;
 };
 
 

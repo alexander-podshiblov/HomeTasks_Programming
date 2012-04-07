@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include "outputer.h"
-
-
-
+#include "inconsole.h"
+#include "infile.h"
 
 int main()
 {
@@ -26,21 +25,22 @@ int main()
         printf("\n");
     }
     printf("Output to the console or in the file (c/f)? ");
+
     char ch = 0;
     scanf("%c", &ch);
 
+    Outputer *k;
+
     if (ch == 'c')
-        f = stdout;
+        k = new InConsole;
     else if (ch == 'f')
-        f = fopen("output.txt", "w");
+        k = new InFile;
 
     printf("\n\n");
 
-    Outputer k;
-    k.bypass(m, n, f);
+    k->bypass(m, n);
 
-    if (ch == 'f')
-        fclose(f);
+    delete k;
     delete m;
     return 0;
 }
