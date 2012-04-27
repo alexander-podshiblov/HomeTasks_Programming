@@ -2,26 +2,24 @@
 #include <QtCore/QObject>
 #include <QtTest/QtTest>
 #include "alist.h"
+#include "plist.h"
 
 
-class AlistTests : public QObject
+class ListTests : public QObject
 {
     Q_OBJECT
 public:
-    explicit AlistTests(QObject *parent = 0) {}
+    explicit ListTests(QObject *parent = 0) {}
     
-private slots:
-    void init()
-    {
-        a = new AList();
-    }
+protected slots:
+    virtual void init() = 0;
 
-    void cleanup()
+    virtual void cleanup()
     {
         delete a;
     }
 
-    void testOfAdding()
+    virtual void testOfAdding()
     {
         a->add(2,1);
         a->add(4,2);
@@ -35,7 +33,7 @@ private slots:
         QVERIFY(a->returnValue(5) == 5);
     }
 
-    void testOfLength()
+    virtual void testOfLength()
     {
         QVERIFY(a->length() == 0);
         a->add(1,1);
@@ -43,7 +41,7 @@ private slots:
         QVERIFY(a->length() == 2);
     }
 
-    void testOfDel()
+    virtual void testOfDel()
     {
         for(int i = 1; i <= 5; i++)
         {
@@ -56,7 +54,7 @@ private slots:
         QVERIFY(a->returnValue(2) == 4);
     }
 
-    void testOfSwap()
+    virtual void testOfSwap()
     {
         for(int i = 1; i <= 5; i++)
         {
@@ -69,9 +67,82 @@ private slots:
 
 
 
-private:
+protected:
     List *a;
     
 };
 
-QTEST_MAIN(AlistTests)
+class ArrayListTests : public ListTests
+{
+    Q_OBJECT
+
+private slots:
+    void init()
+    {
+        a = new AList();
+    }
+    void cleanup()
+    {
+        ListTests::cleanup();
+    }
+
+    void testOfAdding()
+    {
+        ListTests::testOfAdding();
+    }
+
+    void testOfLength()
+    {
+        ListTests::testOfLength();
+    }
+
+    void testOfDel()
+    {
+        ListTests::testOfDel();
+    }
+
+    void testOfSwap()
+    {
+        ListTests::testOfSwap();
+    }
+
+};
+
+class PointListTests : public ListTests
+{
+    Q_OBJECT
+
+private slots:
+    void init()
+    {
+        a = new PList();
+    }
+    void cleanup()
+    {
+        ListTests::cleanup();
+    }
+
+    void testOfAdding()
+    {
+        ListTests::testOfAdding();
+    }
+
+    void testOfLength()
+    {
+        ListTests::testOfLength();
+    }
+
+    void testOfDel()
+    {
+        ListTests::testOfDel();
+    }
+
+    void testOfSwap()
+    {
+        ListTests::testOfSwap();
+    }
+
+};
+
+QTEST_MAIN(ArrayListTests)
+//QTEST_MAIN(PointListTests)
