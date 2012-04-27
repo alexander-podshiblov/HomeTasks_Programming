@@ -8,6 +8,8 @@ QT       += core
 
 QT       -= gui
 
+QT       += testlib
+
 TARGET = Task1
 CONFIG   += console
 CONFIG   -= app_bundle

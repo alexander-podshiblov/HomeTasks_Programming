@@ -35,8 +35,37 @@ private slots:
         QVERIFY(a->returnValue(5) == 5);
     }
 
+    void testOfLength()
+    {
+        QVERIFY(a->length() == 0);
+        a->add(1,1);
+        a->add(2,2);
+        QVERIFY(a->length() == 2);
+    }
 
+    void testOfDel()
+    {
+        for(int i = 1; i <= 5; i++)
+        {
+            a->add(i,i);
+        }
+        a->del(5);
+        a->del(3);
+        a->del(1);
+        QVERIFY(a->returnValue(1) == 2);
+        QVERIFY(a->returnValue(2) == 4);
+    }
 
+    void testOfSwap()
+    {
+        for(int i = 1; i <= 5; i++)
+        {
+            a->add(i,i);
+        }
+        a->swap(2,4);
+        QVERIFY(a->returnValue(2) == 4);
+        QVERIFY(a->returnValue(4) == 2);
+    }
 
 
 
