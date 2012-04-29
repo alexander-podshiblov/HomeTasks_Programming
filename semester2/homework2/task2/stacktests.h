@@ -106,8 +106,7 @@ private slots:
     }
 };
 
-QTEST_MAIN(ArrayStackTests);
-//QTEST_MAIN(PointStackTests);
+
 
 
 
