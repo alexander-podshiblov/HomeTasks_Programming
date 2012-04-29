@@ -1,9 +1,15 @@
 #include <stdio.h>
 #include "matrixio.h"
 #include "sortcol.h"
+#include "test.h"
 
 int main()
 {
+
+    Test test;
+    QTest::qExec(&test);
+
+
     int n = 0;
     int m = 0;
     FILE *f = fopen("input.txt", "r");
