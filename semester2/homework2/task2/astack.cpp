@@ -37,7 +37,10 @@ int AStack::empty()
 
 int AStack::returnLast()
 {
-    return m[m[0]];
+    if (m[0] == 0)
+        return -32000;
+    else
+        return m[m[0]];
 }
 
 void AStack::removeStack()

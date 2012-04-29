@@ -39,7 +39,10 @@ void PStack::del()
 
 int PStack::returnLast()
 {
-    return head->next->value;
+    if (head->next == NULL)
+        return -32000;
+    else
+        return head->next->value;
 }
 
 void PStack::removeStack()
