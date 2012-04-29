@@ -2,6 +2,7 @@
 #include "sort.h"
 #include "bsort.h"
 #include "psort.h"
+#include "sorttest.h"
 
 void printArray(int *m, int n)
 {
@@ -11,6 +12,12 @@ void printArray(int *m, int n)
 
 int main()
 {
+    SortTest test;
+    QTest::qExec(&test);
+
+
+
+
     int m[500];
     int n = 0;
     FILE *f = fopen("input.txt", "r");
@@ -40,6 +47,7 @@ int main()
     printArray(m, n);
 
     delete z;
-    scanf("%*");
-    return 0;
+
+    //return 0;
+
 }
