@@ -6,16 +6,16 @@ class PList : public List
 {
 public:
     PList();
-    ~PList();
-    void add(int value, int num);
-    int length();
-    void del(int num);
-    void printList();
-    int returnValue(int num);
-    void removeList();
-    void swap(int i, int j);
+    virtual ~PList();
+    virtual void add(int value, int num);
+    virtual int length();
+    virtual void del(int num);
+    virtual void printList();
+    virtual int returnValue(int num);
+    virtual void removeList();
+    virtual void swap(int i, int j);
 
-private:
+protected:
     struct Node
     {
         int value;
