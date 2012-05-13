@@ -17,6 +17,16 @@ public:
             m[i] = 0;
     }
     /**
+      *конструктор копирования
+      *@ param v - адрес вектора, из которого происходит копирование
+      */
+    Vector(Vector<T, SIZE> const &a)
+    {
+        for (int i = 0; i < SIZE; i++)
+            m[i] = a.m[i];
+    }
+
+    /**
       *считает сумму векторов
       *@ param a - указатель на первый вектор
       *@ param b - указатель на второй вектор
@@ -55,15 +65,6 @@ public:
             if (m[i] != 0)
                 return false;
         return true;
-    }
-    /**
-      *копирует вектор
-      *@ param a - указатель на вектор, в который происходит копирование
-      */
-    void copy(Vector<T, SIZE> *a)
-    {
-        for (int i = 0; i < SIZE; i++)
-            a->m[i] = m[i];
     }
 
     T m[SIZE];

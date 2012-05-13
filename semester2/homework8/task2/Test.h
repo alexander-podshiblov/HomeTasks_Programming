@@ -61,12 +61,11 @@ private slots:
     {
         QVERIFY(vector->null());
     }
-    void testOfCopy()
+    void testOfCopyConstructor()
     {
-        Vector<int, 3> a;
         for(int i = 0; i < 3; i++)
             vector->m[i] = i + 1;
-        vector->copy(&a);
+        Vector<int, 3> a(*vector);
         QVERIFY(a.m[0] == 1);
         QVERIFY(a.m[1] == 2);
         QVERIFY(a.m[2] == 3);
