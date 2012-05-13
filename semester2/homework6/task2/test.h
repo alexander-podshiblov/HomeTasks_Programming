@@ -26,6 +26,16 @@ private slots:
         QVERIFY(a->head->next->value == 1);
         QVERIFY(a->head->next->next->value == 2);
     }
+    void testOfAdd2()
+    {
+        a->add(2);
+        a->add(1);
+        a->add(2);
+        QVERIFY(a->head->next->value == 1);
+        QVERIFY(a->head->next->next->value == 2);
+        QVERIFY(a->head->next->next->next == NULL);
+    }
+
     void testOfExist()
     {
         a->add(1);
