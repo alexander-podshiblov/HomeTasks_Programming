@@ -1,7 +1,7 @@
 #pragma once
 #include <QtCore/QObject>
 #include <QtTest/QtTest>
-#include "Tree.h"
+#include "tree.h"
 
 class Test : public QObject
 {
