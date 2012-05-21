@@ -22,8 +22,6 @@ private slots:
     {
         char s[100] = "(/(*(+39)4)(-20))";
         a->build(s);
-        a->print(1, 79, 5);
-        printf("\n\n\n\n\n\n");
         QVERIFY(a->calculate() == 24);
     }
 private:

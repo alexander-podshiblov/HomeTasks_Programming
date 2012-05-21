@@ -12,13 +12,6 @@ Tree::~Tree()
     delete right;
 }
 
-void Tree::gotoxy(int x, int y)
-{
-    COORD coord;
-    coord.X = x; coord.Y = y;
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-}
-
 Num::Num(int a)
 {
     value = a;
@@ -29,9 +22,8 @@ int Num::calculate()
     return value;
 }
 
-void Num::print(int x1, int x2, int depth)
+void Num::print()
 {
-    gotoxy((x1 + x2) / 2, depth);
     printf("%i ", value);
 }
 
@@ -49,12 +41,13 @@ int Oper::calculate()
         return l / r;
 }
 
-void Oper::print(int x1, int x2, int depth)
+void Oper::print()
 {
-    gotoxy((x1 + x2) / 2, depth);
-    printf("%c", c);
-    left->print(x1, (x1 + x2) / 2, depth + 2);
-    right->print((x1 + x2) / 2, x2, depth + 2);
+
+    printf("(%c", c);
+    left->print();
+    right->print();
+    printf(")");
 }
 
 void Oper::shift(char *s)
