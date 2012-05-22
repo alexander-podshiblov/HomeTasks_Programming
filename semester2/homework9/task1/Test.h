@@ -67,11 +67,46 @@ private slots:
         a->del(2);
         QVERIFY(a->length() == 3);
     }
+    void TestOfBegin()
+    {
+        a->add(6);
+        a->add(4);
+        a->add(9);
+        a->add(2);
+        a->add(8);
+        a->add(3);
+        a->add(1);
+        a->add(7);
+        a->add(10);
+        Bag::Iterator b = a->begin();
+        QVERIFY(b.returnValue() == 1);
+    }
+    void TestOfBeginAndEnd()
+    {
+        Bag::Iterator b = a->begin();
+        QVERIFY(b == &a->end());
+    }
+    void TestOfIterator()
+    {
+        a->add(6);
+        a->add(1);
+        a->add(4);
+        a->add(9);
+        a->add(2);
+        a->add(8);
+        a->add(3);
+        a->add(5);
+        a->add(7);
+        a->add(10);
+        int i = 0;
 
 
-
-
-
+        for (Bag::Iterator it = a->begin(); it != &a->end(); it++)
+        {
+            i++;
+            QVERIFY(it.returnValue() == i);
+        }
+    }
 
 private:
     Bag *a;

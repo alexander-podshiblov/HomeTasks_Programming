@@ -1,4 +1,5 @@
 #include "bag.h"
+#include <limits.h>
 
 Bag::Bag()
 {
@@ -163,27 +164,126 @@ void Bag::clear(Node *tmp, Node **parent)
     }
 }
 
-void Bag::it(Node *tmp)
+
+
+
+
+Bag::Iterator::Iterator(Node *tmp, Node *head1)
+{
+    a = tmp;
+    head = head1;
+    if (tmp != NULL)
+        currentRepeats = a->repeats;
+    else
+        currentRepeats = 0;
+}
+
+Bag::Iterator Bag::begin()
+{
+        Node *tmp = head;
+        while (tmp->left != NULL)
+            tmp = tmp->left;
+        if (tmp == head)
+        {
+            Iterator tmp2(NULL, head);
+            return tmp2;
+        }
+        else
+        {
+            Iterator tmp2(tmp, head);
+            return tmp2;
+        }
+}
+
+Bag::Iterator Bag::end()
+{
+    Iterator tmp(NULL, head);
+    return tmp;
+}
+
+int Bag::Iterator::returnValue()
+{
+    if (a != NULL)
+        return a->value;
+    else
+        return INT_MIN;
+}
+
+int Bag::Iterator::returnRepeats()
+{
+    if (a != NULL)
+        return a->repeats;
+    else
+        return INT_MIN;
+}
+
+void Bag::Iterator::bypass(Node *tmp, int value)
 {
     if (tmp != NULL)
     {
-        if ((tmp->left == NULL) && (tmp->right == NULL))
-            for (int i = 0; i < tmp->repeats; i++)
-                printf("%i ", tmp->value);
+        if (tmp->left == NULL && tmp->right == NULL)
+        {
+            if (tmp->value > value && tmp->value < nextValue)
+            {
+                nextValue = tmp->value;
+                lastBig = tmp;
+            }
+        }
         else
         {
-        if (tmp->left != NULL)
-            it(tmp->left);
-        for (int i = 0; i < tmp->repeats; i++)
-            printf("%i ", tmp->value);
-        if (tmp->right != NULL)
-            it(tmp->right);
+            bypass(tmp->left, value);
+            if (tmp->value > value && tmp->value < nextValue)
+            {
+                nextValue = tmp->value;
+                lastBig = tmp;
+            }
+            bypass(tmp->right, value);
         }
+
     }
 }
-void Bag::iterator()
+
+
+void Bag::Iterator::operator++()
 {
-    it(head->left);
+    if(currentRepeats > 1)
+    {
+        currentRepeats--;
+    }
+    else
+    {
+        Node *tmp = head->left;
+        nextValue = INT_MAX;
+        lastBig = NULL;
+        bypass(tmp, a->value);
+        if (lastBig == NULL)
+            a = NULL;
+        else
+        {
+            a = lastBig;
+            currentRepeats = a->repeats;
+        }
+    }
+
+
 }
 
+
+bool Bag::Iterator::operator ==(Iterator *it)
+{
+    if (a != NULL && it->returnA() != NULL)
+        if (a->value == it->returnValue())
+            return true;
+        else
+            return false;
+    else if (a == NULL && it->returnA() == NULL)
+        return true;
+    else
+        return false;
+}
+
+bool Bag::Iterator::operator !=(Iterator *it)
+{
+    return !operator ==(it);
+}
 
