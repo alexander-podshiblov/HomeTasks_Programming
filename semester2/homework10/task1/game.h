@@ -14,7 +14,8 @@ class Game : public QWidget
 public:
     explicit Game(QWidget *parent = 0);
     ~Game();
-    QPushButton *field[9];
+    int checkOfWinner();
+    int m[9]; //in public for testing
 
 signals:
     void win(int p);
@@ -23,12 +24,13 @@ public slots:
     void pressed(int k);
     void reset();
     void somebodyWin(int p);
+
     
 private:
     Ui::Game *ui;
     QSignalMapper *sm;
-    int m[9];
+    QPushButton *field[9];
     int player;
-    int checkOfWinner();
+    int courses;
 };
 

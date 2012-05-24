@@ -7,6 +7,7 @@ Game::Game(QWidget *parent) :
 {
     ui->setupUi(this);
     player = 1;
+    courses = 0;
     for (int i = 0; i < 9; i++)
         m[i] = 0;
 
@@ -47,11 +48,17 @@ void Game::pressed(int k)
             ui->lineEdit->setText("Course of the 'X' player");
         }
         player = player * (-1);
+        courses++;
         ////////////////////////////////////
 
         int check = checkOfWinner();
         if (check != 0)
             emit win(check);
+        if (courses == 9)
+        {
+            ui->lineEdit->setText("DRAW! Press RESET");
+            disconnect(sm, SIGNAL(mapped(int)), this, SLOT(pressed(int)));
+        }
     }
 }
 
@@ -59,17 +66,17 @@ int Game::checkOfWinner()
 {
     for (int i = 0; i < 9; i = i + 3)
     {
-        if (m[i] == m[i + 1] && m[i + 1] == m[i + 2])
+        if (m[i] == m[i + 1] && m[i + 1] == m[i + 2] && m[i] != 0)
             return m[i];
     }
     for (int i = 0; i < 3; i++)
     {
-        if (m[i] == m[i + 3] && m[i + 3] == m[i + 6])
+        if (m[i] == m[i + 3] && m[i + 3] == m[i + 6] && m[i] != 0)
             return m[i];
     }
-    if (m[0] == m[4] && m[4] == m[8])
+    if (m[0] == m[4] && m[4] == m[8] && m[0] != 0)
         return m[0];
-    else if (m[2] == m[4] && m[4] == m[6])
+    else if (m[2] == m[4] && m[4] == m[6] && m[2] != 0)
         return m[2];
     else
         return 0;
@@ -79,11 +86,13 @@ void Game::reset()
 {
     ui->lineEdit->setText("Course of the 'X' player");
     player = 1;
+    courses = 0;
     for (int i = 0; i < 9; i++)
     {
         m[i] = 0;
         field[i]->setText(" ");
     }
+    connect(sm, SIGNAL(mapped(int)), this, SLOT(pressed(int)));
 }
 
 
@@ -95,6 +104,7 @@ void Game::somebodyWin(int p)
     else if (p == -1)
         s = "O WIN! Press RESET";
     ui->lineEdit->setText(s);
+    disconnect(sm, SIGNAL(mapped(int)), this, SLOT(pressed(int)));
 }
 
 Game::~Game()
