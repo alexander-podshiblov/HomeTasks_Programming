@@ -4,7 +4,9 @@
 class RoboGraph
 {
 public:
+    RoboGraph();
     RoboGraph(FILE *f);
+    void setFile(FILE *f);
     void analise();
     bool getAnswer();
 

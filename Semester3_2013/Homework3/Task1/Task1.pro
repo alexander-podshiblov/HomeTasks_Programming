@@ -6,6 +6,8 @@
 
 QT       += core
 
+QT       += testlib
+
 QT       -= gui
 
 TARGET = Task1
@@ -19,4 +21,5 @@ SOURCES += main.cpp \
     robograph.cpp
 
 HEADERS += \
-    robograph.h
+    robograph.h \
+    Test.h

@@ -1,6 +1,31 @@
 #include "robograph.h"
 
+RoboGraph::RoboGraph()
+{
+
+}
+
 RoboGraph::RoboGraph(FILE *f)
+{
+    fscanf(f, "%i", &numOfVertex);
+    for (int i = 0; i < numOfVertex; i++)
+    {
+        for (int j = 0; j < numOfVertex; j++)
+        {
+            fscanf(f, "%i", &originalGraph[i][j]);
+            modifiedGraph[i][j] = 0;
+        }
+
+    }
+    fscanf(f, "%i", &numOfRobot);
+    for (int i = 0; i < numOfRobot; i++)
+    {
+        fscanf(f, "%i", &robots[i]);
+    }
+}
+
+
+void RoboGraph::setFile(FILE *f)
 {
     fscanf(f, "%i", &numOfVertex);
     for (int i = 0; i < numOfVertex; i++)
