@@ -2,14 +2,16 @@
 #include "network.h"
 #include "test.h"
 #include <QTime>
+#include "normalrand.h"
 int main()
 {
 
-    qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+
 
     ///*
+    MyRand *rand = new NormalRand();
     FILE *f = fopen("input.txt", "r");
-    Network *a = new Network(f);
+    Network *a = new Network(f, rand);
     fclose(f);
 
     int iterator = 2;

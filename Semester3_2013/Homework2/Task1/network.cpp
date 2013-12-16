@@ -1,8 +1,9 @@
 #include "network.h"
 #include <stdlib.h>
 
-Network::Network(FILE *f)
+Network::Network(FILE *f, MyRand *r)
 {
+
 
 
     f = fopen("input.txt", "r");
@@ -14,6 +15,7 @@ Network::Network(FILE *f)
             fscanf(f, "%i", &connections[i][j]);
 
         comps[i] = new Computer();
+        comps[i]->setRand(r);
     }
     for (int i = 0; i < n; i++)
     {

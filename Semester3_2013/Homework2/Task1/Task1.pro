@@ -19,9 +19,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     network.cpp \
-    computer.cpp
+    computer.cpp \
+    normalrand.cpp \
+    testrand.cpp
 
 HEADERS += \
     network.h \
     test.h \
-    computer.h
+    computer.h \
+    myrand.h \
+    normalrand.h \
+    testrand.h

@@ -7,7 +7,7 @@
 class Network
 {
 public:
-    Network(FILE *f);
+    Network(FILE *f, MyRand *r);
     void doStep();
     void printState(int step);
     bool isWinOfVirus();
