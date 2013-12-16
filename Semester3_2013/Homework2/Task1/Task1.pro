@@ -18,8 +18,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    network.cpp
+    network.cpp \
+    computer.cpp
 
 HEADERS += \
     network.h \
-    test.h
+    test.h \
+    computer.h

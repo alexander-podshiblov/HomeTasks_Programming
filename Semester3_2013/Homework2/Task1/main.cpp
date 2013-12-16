@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include "network.h"
 #include "test.h"
-
+#include <QTime>
 int main()
 {
+
+    qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+
     ///*
     FILE *f = fopen("input.txt", "r");
     Network *a = new Network(f);
@@ -15,7 +18,7 @@ int main()
     while(!a->isWinOfVirus())
     {
 
-        a->update();
+        a->doStep();
         a->printState(iterator);
         iterator++;
     }

@@ -3,62 +3,54 @@
 
 Network::Network(FILE *f)
 {
-    riskWindows = 6;
-    riskLinux = 2;
+
 
     f = fopen("input.txt", "r");
     fscanf(f, "%i", &n);
 
     for (int i = 0; i < n; i++)
+    {
         for (int j = 0; j < n; j++)
             fscanf(f, "%i", &connections[i][j]);
 
+        comps[i] = new Computer();
+    }
     for (int i = 0; i < n; i++)
-        fscanf(f, "%i", &os[i]);
-    // 0 - is Linux, 1 - i Windows
-
-
-    for (int i = 0; i < n; i++)
-        fscanf(f, "%i", &virus[i]);
-
-}
-
-bool Network::isInfected(int risk)
-{
-    if (rand() % maxRisk < risk)
-        return true;
-    else
-        return false;
-}
-
-void Network::tryToInfect(int k)
-{
-    for(int i = 0; i < n; i++)
     {
-        if(connections[k][i] == 1 && virus[i] == 1)
-        {
-            int risk = 0;
-            if (os[k] == 0)
-                risk = riskLinux;
-            else
-                risk = riskWindows;
+        int os;
+        fscanf(f, "%i", &os); // 0 - is Linux, 1 - is Windows
+        if (os == 0)
+            comps[i]->setRisk(2);
+        else if (os == 1)
+            comps[i]->setRisk(6);
+    }
 
-            if (isInfected(risk))
+    for (int i = 0; i < n; i++)
+    {
+        int inf;
+        fscanf(f, "%i", &inf);
+        comps[i]->setInf(inf);
+    }
+
+}
+
+
+
+void Network::doStep()
+{
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            if (connections[i][j] == 1)
             {
-                virus[k] = 1;
+                if (!comps[i]->isInfected() && comps[j]->isInfected())
+                    comps[i]->tryToInfect();
+                else if (comps[i]->isInfected() && !comps[j]->isInfected())
+                    comps[j]->tryToInfect();
+
             }
         }
-    }
-}
-
-
-
-void Network::update()
-{
-    for (int i = 0; i < n; i++)
-    {
-        if (virus[i] == 0)
-            tryToInfect(i);
     }
 }
 
@@ -66,7 +58,7 @@ bool Network::isWinOfVirus()
 {
     for(int i = 0; i < n; i++)
     {
-        if(virus[i] == 0)
+        if(!comps[i]->isInfected())
             return false;
     }
     return true;
@@ -77,18 +69,18 @@ void Network::printState(int step)
     printf("Step %i\n", step);
     for (int i = 0; i < n; i++)
     {
-        if(os[i] == 0)
+        if(comps[i]->getRisk() == 2)
         {
             printf("Linux    ");
-            if(virus[i] == 1)
+            if(comps[i]->isInfected())
                 printf("infected\n");
             else
                 printf("not infected\n");
         }
-        else
+        else if(comps[i]->getRisk() == 6)
         {
             printf("Windows    ");
-            if(virus[i] == 1)
+            if(comps[i]->isInfected())
                 printf("infected\n");
             else
                 printf("not infected\n");

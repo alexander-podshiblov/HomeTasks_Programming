@@ -15,18 +15,14 @@ private slots:
         FILE *f = fopen("input.txt","r");
         a = new Network(f);
         fclose(f);
-        a->riskLinux = 0;
-        a->riskWindows = 10;
     }
     void cleanup()
     {
         delete a;
     }
-    void mainTest()
+    void aTest()
     {
-        a->update();
-        QVERIFY(a->virus[0] == 1);
-        QVERIFY(a->virus[3] == 0);
+
     }
 
 
