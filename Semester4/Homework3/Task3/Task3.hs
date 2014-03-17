@@ -1,0 +1,1 @@
+list = 1 : 7 : 9 : [10 * old + new | old <- list, new <- [1, 7, 9]]

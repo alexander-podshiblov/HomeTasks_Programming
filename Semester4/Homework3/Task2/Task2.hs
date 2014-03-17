@@ -1,0 +1,1 @@
+degOfTwo = 2 : zipWith (+) degOfTwo degOfTwo
